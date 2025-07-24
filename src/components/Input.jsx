@@ -1,6 +1,7 @@
-import { forwardRef } from "react"; 
+import { forwardRef } from "react";
+
 const Input =  forwardRef (function Input({ label, textarea, ...props }, ref ) {
-  const classes =
+  const inputClasses =
     "w-full p-1 border-b-2 rounded-sm border-stone-300 bg-stone-200 text-stone-600 focus:outline-none focus:border-stone-600";
   return (
     <p className="flex lex-col gap-1 my-4">
@@ -8,9 +9,9 @@ const Input =  forwardRef (function Input({ label, textarea, ...props }, ref ) {
         {label}
       </label>
       {textarea ? (
-        <textarea ref={ref} className={classes} {...props} />
+        <textarea ref={ref} className={inputClasses} {...props} />
       ) : (
-        <input ref={ref} className={classes} {...props} />
+        <input ref={ref} className={inputClasses} {...props} />
       )}
     </p>
   );
