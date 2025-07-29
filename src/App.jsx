@@ -5,16 +5,26 @@ import NoProjectSelected from "./components/NoProjectSelected";
 import ProjectsSideBar from "./components/ProjectsSideBar";
 import SelectedProject from "./components/SelectedProject";
 
-
 function App() {
   const [projectsState, setProjectsState] = useState({
     selectedProjectId: undefined,
     projects: [],
+    tasks: [],
   });
 
   const { selectedProjectId, projects } = projectsState;
   const isNoProjectSelected = selectedProjectId === null;
   const isProjectUninitialized = selectedProjectId === undefined;
+  const selectedProject = projects.find((p) => p.id === selectedProjectId);
+
+
+  function handleAddTask() {
+
+  }
+
+  function handleDeletetask(){ 
+    
+  }
 
   function handleSelectProject(id) {
     setProjectsState((prevState) => {
@@ -58,6 +68,19 @@ function App() {
     });
   }
 
+function handleDeleteProject() {
+  setProjectsState((prevState) => {
+    return {
+      ...prevState,
+      selectedProjectId: undefined,
+      projects: prevState.projects.filter((project) => project.id !== prevState.selectedProjectId),
+
+    };
+  });
+}
+
+
+
   return (
     <main className="h-screen my-8 flex gap-8">
       <ProjectsSideBar
@@ -75,6 +98,13 @@ function App() {
 
       {isProjectUninitialized && (
         <NoProjectSelected onStartAddProject={handleStartAddProject} />
+      )}
+
+      {!isNoProjectSelected && !isProjectUninitialized && selectedProject && (
+        <SelectedProject 
+        project={selectedProject}
+        onDelete={handleDeleteProject}
+         />
       )}
     </main>
   );
