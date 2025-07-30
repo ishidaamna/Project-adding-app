@@ -4,7 +4,7 @@ import NewProject from "./components/NewProject";
 import NoProjectSelected from "./components/NoProjectSelected";
 import ProjectsSideBar from "./components/ProjectsSideBar";
 import SelectedProject from "./components/SelectedProject";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [projectsState, setProjectsState] = useState({
@@ -17,8 +17,8 @@ function App() {
   const isNoProjectSelected = selectedProjectId === null;
   const isProjectUninitialized = selectedProjectId === undefined;
   const selectedProject = projects.find((p) => p.id === selectedProjectId);
-  const showSelectedProject = !isNoProjectSelected && !isProjectUninitialized && selectedProject;
-
+  const showSelectedProject =
+    !isNoProjectSelected && !isProjectUninitialized && selectedProject;
 
   function handleAddTask(text) {
     setProjectsState((prevState) => {
@@ -35,12 +35,11 @@ function App() {
     });
   }
 
-  function handleDeletetask(){ 
+  function handleDeletetask() {
     setProjectsState((prevState) => {
       return {
         ...prevState,
         tasks: prevState.tasks.filter((task) => task.id !== id),
-  
       };
     });
   }
@@ -87,18 +86,17 @@ function App() {
     });
   }
 
-function handleDeleteProject() {
-  setProjectsState((prevState) => {
-    return {
-      ...prevState,
-      selectedProjectId: undefined,
-      projects: prevState.projects.filter((project) => project.id !== prevState.selectedProjectId),
-
-    };
-  });
-}
-
-
+  function handleDeleteProject() {
+    setProjectsState((prevState) => {
+      return {
+        ...prevState,
+        selectedProjectId: undefined,
+        projects: prevState.projects.filter(
+          (project) => project.id !== prevState.selectedProjectId
+        ),
+      };
+    });
+  }
 
   return (
     <main className="h-screen my-8 flex gap-8">
@@ -121,13 +119,13 @@ function handleDeleteProject() {
       )}
 
       {showSelectedProject && (
-        <SelectedProject 
-        project={selectedProject}
-        onDelete={handleDeleteProject}
-        onAddTask={handleAddTask}
-        onDeleteTask={handleDeletetask}
-        tasks={projectsState.tasks}
-         />
+        <SelectedProject
+          project={selectedProject}
+          onDelete={handleDeleteProject}
+          onAddTask={handleAddTask}
+          onDeleteTask={handleDeletetask}
+          tasks={projectsState.tasks}
+        />
       )}
     </main>
   );
