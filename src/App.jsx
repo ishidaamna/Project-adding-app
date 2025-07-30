@@ -17,6 +17,7 @@ function App() {
   const isNoProjectSelected = selectedProjectId === null;
   const isProjectUninitialized = selectedProjectId === undefined;
   const selectedProject = projects.find((p) => p.id === selectedProjectId);
+  const showSelectedProject = !isNoProjectSelected && !isProjectUninitialized && selectedProject;
 
 
   function handleAddTask(text) {
@@ -119,7 +120,7 @@ function handleDeleteProject() {
         <NoProjectSelected onStartAddProject={handleStartAddProject} />
       )}
 
-      {!isNoProjectSelected && !isProjectUninitialized && selectedProject && (
+      {showSelectedProject && (
         <SelectedProject 
         project={selectedProject}
         onDelete={handleDeleteProject}
