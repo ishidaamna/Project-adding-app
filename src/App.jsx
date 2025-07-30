@@ -4,6 +4,7 @@ import NewProject from "./components/NewProject";
 import NoProjectSelected from "./components/NoProjectSelected";
 import ProjectsSideBar from "./components/ProjectsSideBar";
 import SelectedProject from "./components/SelectedProject";
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
   const [projectsState, setProjectsState] = useState({
@@ -20,7 +21,7 @@ function App() {
 
   function handleAddTask(text) {
     setProjectsState((prevState) => {
-      const taskId = Math.random();
+      const taskId = uuidv4();
       const newTask = {
         text: text,
         projectId: prevState.selectedProjectId,
